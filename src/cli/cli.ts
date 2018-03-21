@@ -7,8 +7,8 @@ import { typescriptStarter } from './typescript-starter';
 import { getIntro, TypescriptStarterUserOptions } from './utils';
 
 (async () => {
-  const cliOptions = await checkArgs();
-  const userOptions = cliOptions.projectName
+  const cliOptions = await checkArgs(); // collect infos from cli
+  const userOptions = cliOptions.projectName // collect info from cli prompt questions
     ? (cliOptions as TypescriptStarterUserOptions)
     : {
         ...(await (async () => {
@@ -17,8 +17,8 @@ import { getIntro, TypescriptStarterUserOptions } from './utils';
         })()),
         ...cliOptions // merge in cliOptions.install
       };
-  const inferredOptions = await getInferredOptions();
-  return typescriptStarter({ ...inferredOptions, ...userOptions }, LiveTasks);
+  const inferredOptions = await getInferredOptions(); // 通过clone 的项目信息, 推断出一些信息 name, email etc
+  return typescriptStarter({ ...inferredOptions, ...userOptions }, LiveTasks); // run actual jobs
 })().catch((err: Error) => {
   console.error(`
   ${chalk.red(err.message)}

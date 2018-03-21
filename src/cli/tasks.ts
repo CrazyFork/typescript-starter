@@ -22,7 +22,7 @@ export const cloneRepo = (
   const projectDir = join(workingDirectory, dir);
   const gitHistoryDir = join(projectDir, '.git');
   try {
-    await spawner('git', ['clone', '--depth=1', repoURL, dir], {
+    await spawner('git', ['clone', '--depth=1', repoURL, dir], { // spawn a process, that pipe output to stdio or using inherit behaviour
       cwd: workingDirectory,
       stdio: suppressOutput ? 'pipe' : 'inherit'
     });
@@ -61,6 +61,7 @@ export const getGithubUsername = (fetcher: any) => async (
   });
 };
 
+// return user's git name & email info
 export const getUserInfo = (spawner: ExecaStatic) => async () => {
   const opts: Options = {
     encoding: 'utf8',
@@ -81,6 +82,7 @@ export const getUserInfo = (spawner: ExecaStatic) => async () => {
   }
 };
 
+// create a initial git commit
 export const initialCommit = (spawner: ExecaStatic) => async (
   hash: string,
   projectDir: string
@@ -103,6 +105,7 @@ export const initialCommit = (spawner: ExecaStatic) => async (
   );
 };
 
+// run install process
 export const install = (spawner: ExecaStatic) => async (
   runner: Runner,
   projectDir: string

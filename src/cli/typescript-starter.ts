@@ -8,6 +8,7 @@ import replace from 'replace-in-file';
 import { Placeholders, Tasks } from './tasks';
 import { Runner, TypescriptStarterOptions } from './utils';
 
+// 主要的功能是在这里边做的, 主要就是clone远程仓库, 替换文件内容(修改package.json), 根据配置, 执行 npm install
 export async function typescriptStarter(
   {
     description,
@@ -33,7 +34,7 @@ export async function typescriptStarter(
     workingDirectory,
     projectName
   );
-  await del([gitHistoryDir]);
+  await del([gitHistoryDir]); // delete .git dir
   console.log(`
   ${chalk.dim(`Cloned at commit: ${commitHash}`)}
 `);
@@ -79,11 +80,11 @@ export async function typescriptStarter(
   const pkg = readPackageJson(pkgPath);
   const newPkg = {
     ...pkg,
-    dependencies: nodeDefinitions
+    dependencies: nodeDefinitions // :todo, 
       ? filterAllBut(nodeKeptDeps, pkg.dependencies)
       : {},
     description,
-    devDependencies: filterAllBut(keptDevDeps, pkg.devDependencies),
+    devDependencies: filterAllBut(keptDevDeps, pkg.devDependencies), // filter entries in keptDevDeps
     keywords: [],
     repository: `https://github.com/${githubUsername}/${projectName}`,
     scripts:
@@ -101,7 +102,7 @@ export async function typescriptStarter(
   delete newPkg.NOTE;
   // tslint:enable:no-delete no-object-mutation
 
-  writePackageJson(pkgPath, newPkg);
+  writePackageJson(pkgPath, newPkg); // write package.json back to prj path
   spinnerPackage.succeed();
 
   const spinnerGitignore = ora('Updating .gitignore').start();

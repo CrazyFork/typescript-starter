@@ -1,6 +1,7 @@
 import { prompt, Question } from 'inquirer';
 import { Runner, TypescriptStarterUserOptions, validateName } from './utils';
 
+// 用 inquirer 执行问题操作, 搜集信息
 export async function inquire(): Promise<TypescriptStarterUserOptions> {
   const packageNameQuestion: Question = {
     filter: (answer: string) => answer.trim(),

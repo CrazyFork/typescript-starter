@@ -1,3 +1,72 @@
+
+这个库实现了一个cli 工具去创建工程模板, 具体的逻辑就是通过 cli options, cli inquirer 来搜集用户信息, 然后执行操作, 
+* clone 远程工程
+* 创建/删除/修改文件
+* run npm / yarn install
+* commit if there's a git repo
+
+
+
+## notes
+* tsconfig.module.json 可以看出来tsconfig.json 文件配置是可以继承的
+* 项目里边用了 greenkeeper 来审计项目依赖的安全性
+* src/types 定义可以参考下, 看看如何省略依赖的packge 的 types, 
+* npx, 会自动从当前目录往上找对应的 cli 执行脚本, 找不到则会帮助安装
+  * npx - https://zhuanlan.zhihu.com/p/27840803
+* .vscode 中的 launch.json 的 config 需要好好研究下
+* codecov 的配置
+* npm scripts 的写法
+
+typescript:
+* ReadonlyArray<T>, https://www.typescriptlang.org/docs/handbook/interfaces.html
+* Partial, make all props partial.
+* 
+
+
+
+
+## 3rd package
+
+
+```raw
+* nyc - Istanbul's state of the art command line interface,
+  https://www.npmjs.com/package/nyc
+
+* nsp - About Node Security, 也是审计项目的依赖的安全性的
+  https://www.npmjs.com/package/nsp
+
+* npm-run-all - A CLI tool to run multiple npm-scripts in parallel or sequential.
+  这个就是项目中npm scripts里边的run-s, run-p的由来
+  https://github.com/mysticatea/npm-run-all
+
+* execa - A better child_process
+  https://www.npmjs.com/package/execa
+
+* meow - CLI app helper
+  https://www.npmjs.com/package/meow
+
+* ora - Elegant terminal spinner
+  https://www.npmjs.com/package/ora
+
+* project-version - Get the current version of your project.
+  https://www.npmjs.com/package/project-version
+  
+* replace-in-file - A simple utility to quickly replace text in one or more files or globs, 替换文件内容的, 
+  支持glob模式的查找替换, 可以想象成vscode里边的replace
+  https://www.npmjs.com/package/replace-in-file
+
+* update-notifier - Update notifications for your CLI app, 就是npm库有更新的时候可以在terminal提示出来
+  https://www.npmjs.com/package/update-notifier
+
+
+```
+## todo
+* tsconfig.module.json
+* tslint.json 的 functional rule 还挺有意思
+
+
+
+
 <img height="0" width="0" alt="Typescript Starter Dark" src="https://cloud.githubusercontent.com/assets/904007/23006840/4e2b0c6c-f3d2-11e6-8f32-11384ee0cc4b.png"><img alt="typescript-starter" src="https://cloud.githubusercontent.com/assets/904007/23006836/4c67a3b8-f3d2-11e6-8784-12f0a34284d1.png">
 
 [![NPM version](https://img.shields.io/npm/v/typescript-starter.svg)](https://www.npmjs.com/package/typescript-starter)
